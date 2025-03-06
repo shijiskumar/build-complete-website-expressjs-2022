@@ -3,7 +3,7 @@ const config = {
     mode: "local",
     port: 3000,
     mongo: {
-      host: "127.0.0.1",
+      host: "localhost",
       port: "27017",
     },
   },

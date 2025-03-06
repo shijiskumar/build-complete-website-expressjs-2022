@@ -1,14 +1,25 @@
 const BaseController = require("./base"),
   View = require("../views/base");
+const model = new (require("../models/content"))();
 module.exports = new (class AdminController extends BaseController {
   constructor() {
     super("admin");
   }
   run(req, res, next) {
-    if (this.authorize(req)) {
-      req.session.fastdelivery = true;
-      req.session.save(function (err) {
-        this.del(req, function () {
+    model.setDB(req.db);
+    console.log('Inside admin');
+    model.insert(req, function (listMarkup) {
+      v.render({
+        title: "Administration",
+        content: "Welcome to the control panel",
+        list: listMarkup,
+        form: formMarkup,
+      });
+    });
+    //if (this.authorize(req)) {
+      //req.session.fastdelivery = true;
+      //req.session.save(function (err) {
+        model.remove(req, function () {
           this.form(req, res, function (formMarkup) {
             this.list(function (listMarkup) {
               v.render({
@@ -25,15 +36,16 @@ module.exports = new (class AdminController extends BaseController {
           title: "Administration",
           content: "Welcome to the control panel",
         });
-      });
-    } else {
+      //});
+    /* } else {
       const v = new View(res, "admin-login");
       v.render({
         title: "Please login",
       });
-    }
+    } */
   }
   authorize(req) {
+    console.log('req.session - ', req.session);
     return (
       (req.session &&
         req.session.fastdelivery &&

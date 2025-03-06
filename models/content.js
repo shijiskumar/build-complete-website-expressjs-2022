@@ -1,15 +1,15 @@
 const Base = require("./base"),
   crypto = require("node:crypto");
 module.exports = class ContentModel extends Base {
-  constructor(db) {
+    constructor(db) {
     super(db);
   }
   insert(data, callback) {
     data.ID = crypto.randomBytes(20).toString("hex");
-    this.collection().insert(data, {}, callback || function () {});
+    this.db.collection("content").insertOne(data, {}, callback || function () {});
   }
   update(data, callback) {
-    this.collection().update(
+    this.db.collection("content").update(
       { ID: data.ID },
       data,
       {},
@@ -17,12 +17,14 @@ module.exports = class ContentModel extends Base {
     );
   }
   getlist(callback, query) {
-    this.collection()
+    console.log('this.db.collection() - ', this.collection());
+    this.db.collection("content")
       .find(query || {})
       .toArray(callback);
   }
   remove(ID, callback) {
-    this.collection().findAndModify(
+    console.log('this.collection - ', this.db.collection("content"));
+    this.db.collection("content").findAndModify(
       { ID: ID },
       [],
       {},

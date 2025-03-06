@@ -1,11 +1,13 @@
 const BaseController = require("./base"),
   View = require("../views/base");
+const model = new (require("../models/content"))();
 module.exports = new (class AdminController extends BaseController {
   constructor() {
     super("Blog");
     this.content = null;
   }
   run(req, res, next) {
+    console.log('req.db in blog.js - ', req.db);
     model.setDB(req.db);
     var self = this;
     this.getContent(function () {

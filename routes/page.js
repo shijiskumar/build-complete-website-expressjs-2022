@@ -1,7 +1,7 @@
-const BaseController = require("./");
+const BaseController = require("./base");
 const model = new (require("../models/content"))();
-const View = new (require("../views/base"))();
-module.exports = class HomeController extends BaseController {
+const View = require("../views/base");
+module.exports = new (class HomeController extends BaseController {
   constructor() {
     super("Home");
     this.content = null;
@@ -27,4 +27,4 @@ module.exports = class HomeController extends BaseController {
       { type: type }
     );
   }
-};
+})();

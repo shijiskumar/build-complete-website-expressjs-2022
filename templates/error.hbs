@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title}}</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f8f9fa; }
+  .error-container { border: 1px solid #ccc; padding: 20px; background-color: #fff; display: inline-block; }
+  h1 { color: #dc3545; }
+  p { color: #6c757d; }
+  a { text-decoration: none; color: #007bff; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <div class="error-container">
+    <h1>Error {{status}}</h1>
+    <p>{{message}}</p>
+    <pre>{{stack}}</pre>
+    <a href="/">Go back to Home</a>
+  </div>
+</body>
+</html>

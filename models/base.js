@@ -6,7 +6,9 @@ module.exports = class BaseModel {
     this.db = db;
   }
   collection() {
-    if (this._collection) return this._collection;
-    return (this._collection = this.db.collection("fastdelivery-content"));
+    /* console.log('this._collection - ', this._collection);
+    console.log('this.db - ', this.db); */
+    if (this.collection) return this.collection;
+    return (this.collection = this.db.collection("content"));
   }
 };
