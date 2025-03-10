@@ -24,12 +24,12 @@ module.exports = class ContentModel extends Base {
   }
   remove(ID, callback) {
     console.log('this.collection - ', this.db.collection("content"));
-    this.db.collection("content").findAndModify(
+    this.db.collection("content").deleteMany(
       { ID: ID },
       [],
       {},
       { remove: true },
-      callback
+      callback || function () {}
     );
   }
 };

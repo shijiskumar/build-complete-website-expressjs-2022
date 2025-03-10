@@ -34,20 +34,20 @@ module.exports = new (class AdminController extends BaseController {
             var record = records[i];
             blogArticles +=
               '\
-                        <section class="item">\
-                            <img src="' +
-              record.picture +
-              '" alt="" />\
-                            <h2>' +
-              record.title +
-              "</h2>\
-                            <p>" +
-              record.text +
-              '</p>\
-                            <br class="clear" />\
-                            <hr />\
-                        </section>\
-                    ';
+                  <section class="item">\
+                      <img src="' +
+                        record.picture +
+                        '" alt="" />\
+                        <h2>' +
+                        record.title +
+                      "</h2>\
+                      <p>" +
+                        record.text +
+                      '</p>\
+                      <br class="clear" />\
+                      <hr />\
+                  </section>\
+              ';
           }
         }
         self.content.blogArticles = blogArticles;

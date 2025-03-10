@@ -12,7 +12,8 @@ const page = require("./routes/page");
 var session = require('express-session');
 
 const app = express();
-
+const multer = require("multer"); 
+const upload = multer({ dest: "uploads/" });
 
 const dbName = 'fastdelivery'; // Database Name
 const { MongoClient } = require('mongodb');
@@ -60,7 +61,9 @@ app.all("/", function (req, res, next) {
   console.log('In app.js');
   indexRouter.run(req, res, next);
 });
-app.all("/admin*", function (req, res, next) {
+
+app.all("/admin*", upload.single('picture'), function (req, res, next) {
+  console.log("Received data:", req.body);
   admin.run(req, res, next);
 });
 app.all("/blog/:id", function (req, res, next) {
@@ -81,19 +84,25 @@ app.all("/contacts", function (req, res, next) {
 });
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+/* app.use(function (req, res, next) {
   next(createError(404));
-});
+}); */
 
 // error handler
 app.use(function (err, req, res, next) {
+  /* console.error(err.stack);
+  if (res.headersSent) {
+    // If headers already sent, delegate to default Express error handler
+    return next(err);
+  } */
   // set locals, only providing error in development
-  res.locals.message = err.message;
+  /* res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.render("error"); */
 });
+
 process.env.PORT = config.port;
 module.exports = app;
